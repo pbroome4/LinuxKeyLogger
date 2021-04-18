@@ -17,34 +17,28 @@
  * future plan:
  * create a client/server and have clients send input_event to server
  */
-
-
+/*
 void sig_interrupt_handler(int sig){
     fprintf(stdout, "process %d terminated\n", getpid());
     kill(-getpid(), SIGINT); //negative make it interrupt process group
     exit(0);
-}
+}*/
 
 
 int main(int argc, char **argv){
-    //set up termination. when this process ends, close all child processes
-    struct sigaction action_interrupt;
+    //set up termination. close current and all child processes
+    /*struct sigaction action_interrupt;
     action_interrupt.sa_handler = sig_interrupt_handler;
     sigfillset(&action_interrupt.sa_mask);
     action_interrupt.sa_flags=0;
     sigaction(SIGINT, &action_interrupt, NULL);
-   
+   */
 
-    keys_init();
+    logger_init();
     find_keyboards();
+    open_keyboards();
     read_keyboards();
-
-    //keep  this process alive until interrupt signal
-    int count = 0;
     while(1){
-        //printf("%d\n", count);
-        sleep(5);
-        count++;
-    } 
-    
+
+    }
 }
